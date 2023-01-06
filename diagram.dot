@@ -1,0 +1,26 @@
+digraph G {
+  label="TEL-3105"
+  subgraph docker{
+    label="Docker-compose setup"
+    carbonapi_new [label="Carbonapi\rlatest"]
+    carbonapi_old [label="Carbonapi\r0.14.1"]
+    carbonapi_new_old [label="Carbonapi\rlatest"]
+    graphite_clickhouse_new [label="Graphite Clickhouse\rlatest"]
+    graphite_clickhouse_old [label="Graphite Clickhouse\r0.12.0"]
+    carbon_clickhouse_old [label="Carbon Clickhouse\r0.11.2"]
+    carbon_clickhouse_new [label="Carbon Clickhouse\rlatest"]
+    clickhouse [label="Clickhouse"]
+    grafana [label="Grafana"]
+    grafana -> carbonapi_new -> graphite_clickhouse_new -> clickhouse
+    grafana -> carbonapi_old -> graphite_clickhouse_old -> clickhouse
+    grafana -> carbonapi_new_old -> graphite_clickhouse_old 
+    clickhouse -> carbon_clickhouse_old [dir="back"]
+    clickhouse -> carbon_clickhouse_new [dir="back"]
+    carbon_clickhouse_old -> haggar [dir="back"]
+    carbon_clickhouse_new -> haggar [dir="back"]
+  }
+  subgraph deployment{
+    label="Deployment"
+    upgrade_carbonapi -> upgrade_graphite_clickhouse
+  }
+} 

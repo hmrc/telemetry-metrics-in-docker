@@ -1,0 +1,46 @@
+listen: "0.0.0.0:8280"
+concurency: 20
+cache:
+   type: "mem"
+   size_mb: 512
+   defaultTimeoutSec: 60
+cpus: 0
+tz: ""
+
+graphite:
+    host: "carbon-clickhouse-new:2203"
+    interval: "60s"
+    prefix: "carbonapi-new"
+    pattern: "{prefix}.{fqdn}"
+
+#functionsConfig:
+#    graphiteWeb: /etc/carbonapi/graphiteWeb.yaml
+maxBatchSize: 0
+idleConnections: 1000
+pidFile: ""
+upstreams:
+    backendsv2:
+        backends:
+          -
+            groupName: "clickhouse"
+            protocol: "carbonapi_v2_pb"
+            lbMethod: "broadcast"
+            maxTries: 6
+            maxBatchSize: 0
+            keepAliveInterval: "10s"
+            concurrencyLimit: 1000
+            maxIdleConnsPerHost: 1000
+            timeouts:
+                find: "2s"
+                render: "50s"
+                connect: "200ms"
+            servers:
+                - "http://graphite-clickhouse-new:9290"
+expireDelaySec: 600
+logger:
+    - logger: ""
+      file: "stdout"
+      level: "info"
+      encoding: "json"
+      encodingTime: "iso8601"
+      encodingDuration: "seconds"

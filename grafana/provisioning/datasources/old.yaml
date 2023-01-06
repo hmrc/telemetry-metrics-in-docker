@@ -1,0 +1,5 @@
+apiVersion: 1
+datasources:
+  - name: old
+    type: graphite
+    url: http://carbonapi-old:8180

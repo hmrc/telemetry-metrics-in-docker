@@ -1,0 +1,9 @@
+apiVersion: 1
+
+providers:
+  - name: Migration    # A uniquely identifiable name for the provider
+    folder: migration # The folder where to place the dashboards
+    type: file
+    updateIntervalSeconds: 10
+    options:
+      path:  /etc/grafana/provisioning/dashboards/migration
