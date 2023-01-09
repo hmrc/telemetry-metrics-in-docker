@@ -1,0 +1,35 @@
+[common]
+listen = ":9190"
+max-cpu = 1
+
+[clickhouse]
+url = "http://clickhouse:8123/?max_query_size=268435456&max_ast_elements=1000000&max_execution_time=52"
+data-table = "graphite_old.graphite"
+tree-table = "graphite_old.graphite_tree"
+rollup-conf = "/rollup.xml"
+data-timeout = "1m0s"
+tree-timeout = "1m0s"
+connect-timeout = "1s"
+
+[carbonlink]
+server = ""
+threads-per-request = 10
+connect-timeout = "50ms"
+query-timeout = "50ms"
+total-timeout = "500ms"
+
+[[logging]]
+logger = "query"
+file = "stdout"
+level = "warn"
+encoding = "mixed"
+encoding-time = "iso8601"
+encoding-duration = "seconds"
+
+[[logging]]
+logger = ""
+file = "stdout"
+level = "info"
+encoding = "mixed"
+encoding-time = "iso8601"
+encoding-duration = "seconds"

@@ -1,7 +1,7 @@
 
 # telemetry-metrics-in-docker
 
-This is a placeholder README.md for a new repository
+Docker compose graphite style metrics stack with clickhouse in the middle.
 
 ### License
 

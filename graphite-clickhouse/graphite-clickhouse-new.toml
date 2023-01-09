@@ -1,0 +1,50 @@
+[common]
+ listen = ":9290"
+ max-cpu = 1
+
+[metrics]
+ metric-endpoint = "carbon-clickhouse-new:2203"
+ # graphite metrics send interval
+ metric-interval = "10s"
+ metric-prefix = "graphite-clickhouse-new"
+
+[clickhouse]
+# url = "http://clickhouse:8123/?cancel_http_readonly_queries_on_client_close=1&max_query_size=268435456&max_ast_elements=1000000&max_execution_time=52"
+ url = "http://clickhouse:8123"
+ data-timeout = "1m0s"
+ index-table = "graphite_new.graphite_index"
+ index-use-daily = true
+ index-reverse = "auto"
+ index-timeout = "1m0s"
+ extra-prefix = ""
+ connect-timeout = "1s"
+ max-data-points = 1048576
+ internal-aggregation = false
+
+[[data-table]]
+ table = "graphite_new.graphite"
+ reverse = false
+ rollup-conf = "/rollup.xml"
+ rollup-auto-interval = "1m0s"
+ rollup-default-precision = 0
+ rollup-default-function = ""
+ rollup-use-reverted = false
+ context = []
+
+[carbonlink]
+ server = ""
+ threads-per-request = 10
+ connect-timeout = "50ms"
+ query-timeout = "50ms"
+ # timeout for querying and parsing response
+ total-timeout = "500ms"
+
+[[logging]]
+logger = "query"
+file = "stdout"
+level = "warn"
+
+[[logging]]
+ logger = ""
+ file = "stdout"
+ level = "info"
