@@ -1,5 +1,5 @@
-build: diagram
-	docker-compose build 
+build:
+	docker-compose build
 
 kill:
 	docker-compose kill

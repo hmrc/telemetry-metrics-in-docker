@@ -31,6 +31,18 @@
       </retention>
     </pattern>
     <pattern>
+      <regexp>haggar.agent.0.metrics.0</regexp>
+      <function>sum</function>
+      <retention>
+        <age>0</age>
+        <precision>60</precision>
+      </retention>
+      <retention>
+        <age>1800</age>
+        <precision>600</precision>
+      </retention>
+    </pattern>
+    <pattern>
       <regexp>\.upper$</regexp>
       <function>max</function>
       <retention>

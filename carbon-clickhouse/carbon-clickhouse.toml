@@ -12,7 +12,7 @@ max-cpu = 2
 # "stderr", "stdout" can be used as file name
 file = "stdout"
 # Logging error level. Valid values: "debug", "info", "warn" "error"
-level = "debug"
+level = "warn"
 
 [data]
 path = "/tmp"

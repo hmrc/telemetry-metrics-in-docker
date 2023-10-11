@@ -3,10 +3,10 @@
  max-cpu = 1
 
 [metrics]
- metric-endpoint = "carbon-clickhouse-new:2203"
+ metric-endpoint = "carbon-clickhouse:2203"
  # graphite metrics send interval
  metric-interval = "10s"
- metric-prefix = "graphite-clickhouse-new"
+ metric-prefix = "graphite-clickhouse"
 
 [clickhouse]
 # url = "http://clickhouse:8123/?cancel_http_readonly_queries_on_client_close=1&max_query_size=268435456&max_ast_elements=1000000&max_execution_time=52"
@@ -42,9 +42,9 @@
 [[logging]]
 logger = "query"
 file = "stdout"
-level = "warn"
+level = "error"
 
 [[logging]]
  logger = ""
  file = "stdout"
- level = "info"
+ level = "error"

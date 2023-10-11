@@ -8,13 +8,11 @@ cpus: 0
 tz: ""
 
 graphite:
-    host: "carbon-clickhouse-new:2203"
+    host: "carbon-clickhouse:2203"
     interval: "60s"
-    prefix: "carbonapi-new"
+    prefix: "carbonapi"
     pattern: "{prefix}.{fqdn}"
 
-#functionsConfig:
-#    graphiteWeb: /etc/carbonapi/graphiteWeb.yaml
 maxBatchSize: 0
 idleConnections: 1000
 pidFile: ""
@@ -35,12 +33,12 @@ upstreams:
                 render: "50s"
                 connect: "200ms"
             servers:
-                - "http://graphite-clickhouse-new:9290"
+                - "http://graphite-clickhouse:9290"
 expireDelaySec: 600
 logger:
     - logger: ""
       file: "stdout"
-      level: "info"
+      level: "error"
       encoding: "json"
       encodingTime: "iso8601"
       encodingDuration: "seconds"
