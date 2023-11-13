@@ -1,7 +1,7 @@
 <clickhouse>
     <graphite>
-        <host>carbon-clickhouse-1</host>
-        <port>2003</port>
+        <host>carbon-clickhouse</host>
+        <port>2103</port>
         <timeout>0.1</timeout>
         <interval>60</interval>
         <root_path>clickhouse</root_path>

@@ -1,4 +1,4 @@
-listen: "0.0.0.0:8280"
+listen: "0.0.0.0:8180"
 concurency: 20
 cache:
    type: "mem"
@@ -8,9 +8,9 @@ cpus: 0
 tz: ""
 
 graphite:
-    host: "carbon-clickhouse-new:2203"
+    host: "carbon-clickhouse:2103"
     interval: "60s"
-    prefix: "carbonapi-new"
+    prefix: "carbonapi"
     pattern: "{prefix}.{fqdn}"
 
 #functionsConfig:
@@ -35,7 +35,7 @@ upstreams:
                 render: "50s"
                 connect: "200ms"
             servers:
-                - "http://graphite-clickhouse-new:9290"
+                - "http://graphite-clickhouse:9190"
 expireDelaySec: 600
 logger:
     - logger: ""

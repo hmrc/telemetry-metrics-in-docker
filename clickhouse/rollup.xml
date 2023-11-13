@@ -47,6 +47,10 @@
       <function>sum</function>
       <retention>
         <age>0</age>
+        <precision>1</precision>
+      </retention>
+      <retention>
+        <age>60</age>
         <precision>60</precision>
       </retention>
       <retention>

@@ -1,18 +1,18 @@
 [common]
- listen = ":9290"
+ listen = ":9190"
  max-cpu = 1
 
 [metrics]
- metric-endpoint = "carbon-clickhouse-new:2203"
+ metric-endpoint = "carbon-clickhouse:2103"
  # graphite metrics send interval
  metric-interval = "10s"
- metric-prefix = "graphite-clickhouse-new"
+ metric-prefix = "graphite-clickhouse"
 
 [clickhouse]
 # url = "http://clickhouse:8123/?cancel_http_readonly_queries_on_client_close=1&max_query_size=268435456&max_ast_elements=1000000&max_execution_time=52"
  url = "http://clickhouse:8123"
  data-timeout = "1m0s"
- index-table = "graphite_new.graphite_index"
+ index-table = "graphite.graphite_index"
  index-use-daily = true
  index-reverse = "auto"
  index-timeout = "1m0s"
@@ -22,7 +22,7 @@
  internal-aggregation = false
 
 [[data-table]]
- table = "graphite_new.graphite"
+ table = "graphite.graphite"
  reverse = false
  rollup-conf = "/rollup.xml"
  rollup-auto-interval = "1m0s"

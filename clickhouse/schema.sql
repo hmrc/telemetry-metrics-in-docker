@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS graphite_new;
+CREATE DATABASE IF NOT EXISTS graphite;
 
-CREATE TABLE IF NOT EXISTS graphite_new.graphite
+CREATE TABLE IF NOT EXISTS graphite.graphite
 (
     Path String,
     Value Float64,
@@ -14,21 +14,8 @@ ORDER BY (Path, Time)
 TTL Date + toIntervalMonth(25)
 SETTINGS index_granularity = 8125;
 
--- legacy tree table
-CREATE TABLE IF NOT EXISTS graphite_new.graphite_tree
-(
-    Date Date,
-    Level UInt32,
-    Path String,
-    Deleted UInt8,
-    Version UInt32
-)
-ENGINE = ReplacingMergeTree
-ORDER BY (Level, Path)
-SETTINGS index_granularity = 8192;
-
 -- optional table for faster metric search
-CREATE TABLE IF NOT EXISTS graphite_new.graphite_index
+CREATE TABLE IF NOT EXISTS graphite.graphite_index
 (
     Date Date,
     Level UInt32,
@@ -40,7 +27,7 @@ PARTITION BY toMonday(Date)
 ORDER BY (Level, Path, Date);
 
 -- optional table for storing Graphite tags
-CREATE TABLE IF NOT EXISTS graphite_new.graphite_tagged
+CREATE TABLE IF NOT EXISTS graphite.graphite_tagged
 (
     Date Date,
     Tag1 String,
@@ -51,32 +38,3 @@ CREATE TABLE IF NOT EXISTS graphite_new.graphite_tagged
 ENGINE = ReplacingMergeTree(Version)
 PARTITION BY toMonday(Date)
 ORDER BY (Tag1, Path, Date);
-
-CREATE DATABASE IF NOT EXISTS graphite_old;
-
-CREATE TABLE IF NOT EXISTS graphite_old.graphite
-(
-    Path String,
-    Value Float64,
-    Time UInt32,
-    Date Date,
-    Timestamp UInt32
-)
-ENGINE = GraphiteMergeTree('graphite_rollup')
-PARTITION BY toMonday(Date)
-ORDER BY (Path, Time)
-TTL Date + toIntervalMonth(25)
-SETTINGS index_granularity = 8192;
-
-
-CREATE TABLE IF NOT EXISTS graphite_old.graphite_tree
-(
-    Date Date,
-    Level UInt32,
-    Path String,
-    Deleted UInt8,
-    Version UInt32
-)
-ENGINE = ReplacingMergeTree
-ORDER BY (Level, Path)
-SETTINGS index_granularity = 8192;
