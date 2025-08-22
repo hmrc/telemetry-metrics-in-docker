@@ -25,3 +25,8 @@ ps:
 
 diagram:
 	dot -Tpng diagram.dot > diagram.png
+.PHONY: diagram
+
+rm-vol:
+	-docker volume rm telemetry-metrics-in-docker_clickhouse_data
+.PHONY: rm-vol
