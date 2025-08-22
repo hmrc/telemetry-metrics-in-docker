@@ -1,18 +1,32 @@
+DOCKER_COMPOSE ?= $(shell command -v docker-compose || echo "docker compose")
+
+
 build: diagram
-	docker-compose build 
+	cd haggar && docker build -t haggar .
+.PHONY: build
 
 kill:
-	docker-compose kill
+	$(DOCKER_COMPOSE) kill
+.PHONY: kill
 
 start: kill build
-	docker-compose up -d
+	$(DOCKER_COMPOSE) up -d
+.PHONY: start
 
 nuke:
-	docker-compose down -v --rmi all
+	$(DOCKER_COMPOSE) down -v --rmi all
 	rm -f diagram.png
+.PHONY: nuke
 
 ps:
-	docker-compose ps
+	$(DOCKER_COMPOSE) ps
+.PHONY: ps
+
 
 diagram:
 	dot -Tpng diagram.dot > diagram.png
+.PHONY: diagram
+
+rm-vol:
+	-docker volume rm telemetry-metrics-in-docker_clickhouse_data
+.PHONY: rm-vol
