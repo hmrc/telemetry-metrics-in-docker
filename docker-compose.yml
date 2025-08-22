@@ -1,7 +1,7 @@
-version: '2'
+---
 services:
   clickhouse:
-    image: docker.io/bitnami/clickhouse:23
+    image: bitnami/clickhouse:25.7.4
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
@@ -35,7 +35,7 @@ services:
     networks:
       - metrics
   graphite-clickhouse:
-    image: lomik/graphite-clickhouse:v0.12.0
+    image: lomik/graphite-clickhouse:v0.13.0
     volumes:
       - ${PWD}/graphite-clickhouse/graphite-clickhouse.toml:/graphite-clickhouse.toml
       - ${PWD}/clickhouse/rollup.xml:/rollup.xml
@@ -47,7 +47,7 @@ services:
     networks:
       - metrics
   carbonapi:
-    image: gographite/carbonapi:v0.14.1
+    image: ghcr.io/go-graphite/carbonapi:0.17
     volumes:
       - ${PWD}/carbonapi/carbonapi.yml:/etc/carbonapi.yml
     ports:
